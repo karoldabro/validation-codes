@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  php:
+    image: webdevops/php-dev:8.2
+    volumes:
+      - ./:/app/
+    working_dir: /app
+    environment:
+      - XDEBUG_MODE=coverage

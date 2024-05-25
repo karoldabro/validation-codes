@@ -1,0 +1,45 @@
+{
+	"name": "kdabrow/validation-codes",
+	"description": "Validation codes",
+	"type": "package",
+	"keywords": [
+		"php",
+		"laravel",
+		"api",
+		"validation"
+	],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Karol Dąbrowski",
+			"email": "20278897+karoldabro@users.noreply.github.com",
+			"homepage": "https://kdabrow.com"
+		}
+	],
+	"require": {
+		"php": ">=8.2.0",
+		"illuminate/support": "^10.0"
+	},
+	"require-dev": {
+		"orchestra/testbench": "^8.0",
+		"barryvdh/laravel-ide-helper": "^3.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Kdabrow\\ValidationCodes\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Kdabrow\\ValidationCodes\\Tests\\": "tests"
+		}
+	},
+	"prefer-stable": true,
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Kdabrow\\ValidationCodes\\Providers\\ValidationCodesProvider"
+			]
+		}
+	}
+}

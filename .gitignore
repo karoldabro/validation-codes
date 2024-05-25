@@ -1,0 +1,11 @@
+vendor
+.phpunit.result.cache
+.vscode
+storage/*
+!storage/.gitkeep
+.env
+Makefile
+.gitmodules
+composer.lock
+.idea
+.phpunit.cache
