@@ -15,16 +15,16 @@ class Handler extends \Illuminate\Foundation\Exceptions\Handler
 	 */
 	protected function invalidJson($request, ValidationException $exception)
 	{
-		if (config('validation_codes.show_only_codes')) { // TODO: test
+		if (config('validation_codes.show_only_codes')) {
 			return response()->json([
-				'codes' => $exception->validator->getCodes(), // TODO: test
+				'codes' => $exception->validator->getCodes()->messages(), // TODO: test
 			], $exception->status);
 		}
 
 		return response()->json([
 			'message' => $exception->getMessage(),
 			'errors' => $exception->errors(),
-			'codes' => $exception->validator->getCodes(),
+			'codes' => $exception->validator->getCodes()->messages(),
 		], $exception->status);
 	}
 }

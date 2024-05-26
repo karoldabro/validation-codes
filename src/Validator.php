@@ -52,19 +52,23 @@ class Validator extends \Illuminate\Validation\Validator
 			$this->getMessage($attributeWithPlaceholders, $rule), $attribute, $rule, $parameters
 		));
 
-		$this->codes->add($attribute, $this->findErrorCode($rule)); // TODO: test
+		$this->codes->add($attribute, $this->findErrorCode($attribute, $rule)); // TODO: test
 
 		$this->failedRules[$attribute][$rule] = $parameters;
 	}
 
-	protected function findErrorCode(string $rule): string
+	protected function findErrorCode($attribute, string $rule): string
 	{
 		$lowerRule = Str::snake($rule);
 
 		$key = "validation_codes::codes.{$lowerRule}";
 
 		if ($key !== ($value = $this->translator->get($key))) { // TODO: test
-			return $value;
+			return $this->getCustomMessageFromTranslator(
+				in_array($rule, $this->sizeRules)
+					? [$key.".{$this->getAttributeType($attribute)}", $key]
+					: $key
+			);
 		}
 
 		return 'E0'; // TODO: test

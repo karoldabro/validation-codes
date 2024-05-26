@@ -51,4 +51,68 @@ class ApiTest extends TestCase
 			],
 		]);
 	}
+
+	/** @test */
+	public function response_contains_only_codes_while_configuration_show_only_codes_is_true()
+	{
+		config()->set('validation_codes.show_only_codes', true);
+
+		$response = $this->json('POST', '/test');
+
+		$response->assertExactJson([
+			"codes" => [
+				"field_1" => [
+					"E104",
+				],
+			],
+		]);
+	}
+
+	/** @test */
+	public function response_contains_multiple_codes()
+	{
+		$response = $this->json('POST', '/test_with_multiple_errors', ["field_1" => "test"]);
+
+		$response->assertJson([
+			"codes" => [
+				"field_1" => [
+					"E53", "E77",
+				],
+			],
+		]);
+	}
+
+	/** @test */
+	public function response_contains_multiple_fields()
+	{
+		$response = $this->json('POST', '/test_with_multiple_fields', ["field_1" => "test"]);
+
+		$response->assertJson([
+			"codes" => [
+				"field_1" => [
+					"E53", "E77",
+				],
+				"field_2" => [
+					"E104",
+				],
+			],
+		]);
+	}
+
+	/** @test */
+	public function response_contains_array_fields()
+	{
+		$response = $this->json('POST', '/test_with_array_fields');
+
+		$response->assertJson([
+			"codes" => [
+				"field_1" => [
+					"E53",
+				],
+				"field_1.*.field_2" => [
+					"E104",
+				],
+			],
+		]);
+	}
 }
