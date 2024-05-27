@@ -102,15 +102,43 @@ class ApiTest extends TestCase
 	/** @test */
 	public function response_contains_array_fields()
 	{
-		$response = $this->json('POST', '/test_with_array_fields');
+		$response = $this->json('POST', '/test_with_array_fields', ["field_1" => [[]]]);
 
 		$response->assertJson([
 			"codes" => [
 				"field_1" => [
-					"E53",
+					"E75",
 				],
-				"field_1.*.field_2" => [
+				"field_1.0.field_2" => [
 					"E104",
+				],
+			],
+		]);
+	}
+
+	/** @test */
+	public function response_contains_errors_from_custom_validation_rules()
+	{
+		$response = $this->json('POST', '/test_with_custom_validation_rules', ["field_1" => 1]);
+
+		$response->assertJson([
+			"codes" => [
+				"field_1" => [
+					"E10000",
+				],
+			],
+		]);
+	}
+
+	/** @test */
+	public function response_contains_fallback_error_when_custom_rules_do_not_contain_the_code()
+	{
+		$response = $this->json('POST', '/test_with_custom_validation_rules_without_code', ["field_1" => 1]);
+
+		$response->assertJson([
+			"codes" => [
+				"field_1" => [
+					"E0",
 				],
 			],
 		]);

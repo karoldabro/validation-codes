@@ -1,6 +1,7 @@
 <?php
 
 return [
+	'fallback_error' => 'E0',
 	'accepted' => 'E1',
 	'accepted_if' => 'E2',
 	'active_url' => 'E3',

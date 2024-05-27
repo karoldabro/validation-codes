@@ -2,8 +2,11 @@
 
 namespace Kdabrow\ValidationCodes;
 
+use Illuminate\Contracts\Validation\DataAwareRule;
+use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
+use Illuminate\Validation\InvokableValidationRule;
 
 class Validator extends \Illuminate\Validation\Validator
 {
@@ -57,13 +60,61 @@ class Validator extends \Illuminate\Validation\Validator
 		$this->failedRules[$attribute][$rule] = $parameters;
 	}
 
+	/**
+	 * Validate an attribute using a custom rule object.
+	 *
+	 * @param  string  $attribute
+	 * @param  mixed  $value
+	 * @param  \Illuminate\Contracts\Validation\Rule  $rule
+	 * @return void
+	 */
+	protected function validateUsingCustomRule($attribute, $value, $rule)
+	{
+		$attribute = $this->replacePlaceholderInString($attribute);
+
+		$value = is_array($value) ? $this->replacePlaceholders($value) : $value;
+
+		if ($rule instanceof ValidatorAwareRule) {
+			$rule->setValidator($this);
+		}
+
+		if ($rule instanceof DataAwareRule) {
+			$rule->setData($this->data);
+		}
+
+		if (! $rule->passes($attribute, $value)) {
+			$ruleClass = $rule instanceof InvokableValidationRule ?
+				get_class($rule->invokable()) :
+				get_class($rule);
+
+			$this->failedRules[$attribute][$ruleClass] = [];
+
+			$messages = $this->getFromLocalArray($attribute, $ruleClass) ?? $rule->message();
+
+			$messages = $messages ? (array) $messages : [$ruleClass];
+
+			foreach ($messages as $key => $message) {
+				$key = is_string($key) ? $key : $attribute;
+
+				$this->messages->add($key, $this->makeReplacements(
+					$message, $key, $ruleClass, []
+				));
+
+				$this->codes->add(
+					$attribute,
+					method_exists($ruleClass, 'getCode') ? $ruleClass::getCode($attribute) : $this->fallbackTranslation(), // TODO: change E0 to translation
+				); // TODO: test
+			}
+		}
+	}
+
 	protected function findErrorCode($attribute, string $rule): string
 	{
 		$lowerRule = Str::snake($rule);
 
-		$key = "validation_codes::codes.{$lowerRule}";
+		$key = $this->getKey($lowerRule);
 
-		if ($key !== ($value = $this->translator->get($key))) { // TODO: test
+		if ($key !== ($this->getTranslation($lowerRule))) { // TODO: test
 			return $this->getCustomMessageFromTranslator(
 				in_array($rule, $this->sizeRules)
 					? [$key.".{$this->getAttributeType($attribute)}", $key]
@@ -71,6 +122,21 @@ class Validator extends \Illuminate\Validation\Validator
 			);
 		}
 
-		return 'E0'; // TODO: test
+		return $this->fallbackTranslation(); // TODO: test
+	}
+
+	private function fallbackTranslation(): string|array
+	{
+		return $this->getTranslation("fallback_error");
+	}
+
+	private function getTranslation(string $ruleName): string|array
+	{
+		return $this->translator->get($this->getKey($ruleName));
+	}
+
+	private function getKey(string $ruleName): string
+	{
+		return "validation_codes::codes.{$ruleName}";
 	}
 }

@@ -15,10 +15,19 @@ Route::post('/test_with_multiple_fields', function (\Illuminate\Http\Request $re
 });
 
 Route::post('/test_with_array_fields', function (\Illuminate\Http\Request $request) {
-	try{
-	$request->validate(["field_1" => "array|min:100", "field_1.*.field_2" => "required"]);
+	$request->validate(["field_1" => "required|array|min:100", "field_1.*.field_2" => "required|int"]);
+});
 
-} catch (Throwable $exception) {
-	dd($exception);
-}
+Route::post('/test_with_custom_validation_rules', function (\Illuminate\Http\Request $request) {
+	$request->validate(["field_1" => [new \Kdabrow\ValidationCodes\Tests\CustomRule()]]);
+});
+
+Route::post('/test_with_custom_validation_rules_without_code', function (\Illuminate\Http\Request $request) {
+	$request->validate(["field_1" => [new \Kdabrow\ValidationCodes\Tests\CustomRuleWithoutCode()]]);
+});
+
+Route::post('/test_with_custom_validation_rules_without_code', function (\Illuminate\Http\Request $request) {
+	$request->validate(["field_1" => [function() {
+
+	}]]);
 });
