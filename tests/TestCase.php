@@ -3,6 +3,7 @@
 namespace Kdabrow\ValidationCodes\Tests;
 
 use Kdabrow\ValidationCodes\Providers\ValidationCodesProvider;
+use Kdabrow\ValidationCodes\Tests\Helpers\ValidationCodesTestProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {

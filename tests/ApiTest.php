@@ -20,6 +20,7 @@ class ApiTest extends TestCase
 		$response = $this->json('POST', '/test');
 
 		$response->assertJson([
+			"message" => "The field 1 field is required.",
 			"errors" => [
 				"field_1" => [
 					"The field 1 field is required.",
@@ -139,6 +140,34 @@ class ApiTest extends TestCase
 			"codes" => [
 				"field_1" => [
 					"E0",
+				],
+			],
+		]);
+	}
+
+	/** @test */
+	public function response_returns_fallback_error_when_validation_rule_translation_do_not_exists()
+	{
+		$response = $this->json('POST', '/test_with_not_existing_validation_code', ["field_1" => 1]);
+
+		$response->assertJson([
+			"codes" => [
+				"field_1" => [
+					"E0",
+				],
+			],
+		]);
+	}
+
+	/** @test */
+	public function response_returns_the_code_when_validation_rule_translation_extends_validator()
+	{
+		$response = $this->json('POST', '/test_with_existing_validation_code', ["field_1" => 1]);
+
+		$response->assertJson([
+			"codes" => [
+				"field_1" => [
+					"E10001",
 				],
 			],
 		]);

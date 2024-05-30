@@ -19,15 +19,17 @@ Route::post('/test_with_array_fields', function (\Illuminate\Http\Request $reque
 });
 
 Route::post('/test_with_custom_validation_rules', function (\Illuminate\Http\Request $request) {
-	$request->validate(["field_1" => [new \Kdabrow\ValidationCodes\Tests\CustomRule()]]);
+	$request->validate(["field_1" => [new \Kdabrow\ValidationCodes\Tests\Helpers\CustomRule()]]);
 });
 
 Route::post('/test_with_custom_validation_rules_without_code', function (\Illuminate\Http\Request $request) {
-	$request->validate(["field_1" => [new \Kdabrow\ValidationCodes\Tests\CustomRuleWithoutCode()]]);
+	$request->validate(["field_1" => [new \Kdabrow\ValidationCodes\Tests\Helpers\CustomRuleWithoutCode()]]);
 });
 
-Route::post('/test_with_custom_validation_rules_without_code', function (\Illuminate\Http\Request $request) {
-	$request->validate(["field_1" => [function() {
+Route::post('/test_with_not_existing_validation_code', function (\Illuminate\Http\Request $request) {
+	$request->validate(["field_1" => ['rule_without_code']]);
+});
 
-	}]]);
+Route::post('/test_with_existing_validation_code', function (\Illuminate\Http\Request $request) {
+	$request->validate(["field_1" => ['rule_with_code']]);
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kdabrow\ValidationCodes\Tests;
+namespace Kdabrow\ValidationCodes\Tests\Helpers;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;

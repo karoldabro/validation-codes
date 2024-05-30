@@ -17,7 +17,7 @@ class Handler extends \Illuminate\Foundation\Exceptions\Handler
 	{
 		if (config('validation_codes.show_only_codes')) {
 			return response()->json([
-				'codes' => $exception->validator->getCodes()->messages(), // TODO: test
+				'codes' => $exception->validator->getCodes()->messages(),
 			], $exception->status);
 		}
 

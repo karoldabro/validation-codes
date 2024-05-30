@@ -10,6 +10,14 @@ use Illuminate\Validation\InvokableValidationRule;
 
 class Validator extends \Illuminate\Validation\Validator
 {
+
+	/**
+	 * The array of fallback error codes.
+	 *
+	 * @var array
+	 */
+	public $fallbackCodes = [];
+
 	private MessageBag $codes;
 
 	public function getCodes(): MessageBag
@@ -24,7 +32,7 @@ class Validator extends \Illuminate\Validation\Validator
 	 */
 	public function passes()
 	{
-		$this->codes = new MessageBag; // TODO: test
+		$this->codes = new MessageBag;
 
 		return parent::passes();
 	}
@@ -122,7 +130,20 @@ class Validator extends \Illuminate\Validation\Validator
 			);
 		}
 
-		return $this->fallbackTranslation(); // TODO: test
+		return $this->getFromLocalArray(
+			$attribute, $lowerRule, $this->fallbackCodes
+		) ?: $this->fallbackTranslation(); // TODO: test
+	}
+
+	/**
+	 * Set the fallback codes for the validator.
+	 *
+	 * @param  array  $codes
+	 * @return void
+	 */
+	public function setFallbackCodes(array $codes)
+	{
+		$this->fallbackCodes = $codes;
 	}
 
 	private function fallbackTranslation(): string|array
