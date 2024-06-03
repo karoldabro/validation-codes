@@ -28,8 +28,6 @@ class ValidationCodesProvider extends ServiceProvider
 
 			return $factory;
 		});
-
-		$this->app->singleton(ExceptionHandler::class, Handler::class);
 	}
 
 	public function boot()

@@ -25,6 +25,16 @@ composer require kdabrow/validation-codes
 ```
 
 Afterward, extend your `Exception\Handler` file with `Kdabrow\ValidationCodes\Handler`.
+```php
+<?php
+
+namespace App\Exceptions;
+
+class Handler extends \Kdabrow\ValidationCodes\Handler
+{
+
+}
+```
 
 ## How It Works
 
