@@ -9,3 +9,4 @@ Makefile
 composer.lock
 .idea
 .phpunit.cache
+_ide_helper.php
