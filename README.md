@@ -1,3 +1,9 @@
+<p align="center">
+<img alt="GitHub Workflow Status (branch)" src="https://github.com/karoldabro/validation-codes/actions/workflows/laravel.yml/badge.svg">
+<img alt="Packagist Version" src="https://img.shields.io/packagist/v/kdabrow/validation-codes">
+<img alt="Scrutinizer code quality (GitHub/Bitbucket)" src="https://img.shields.io/scrutinizer/quality/g/karoldabro/validation-codes/master">
+</p>
+
 # Validation Codes for Laravel
 
 This package enhances Laravel's validation error responses (status 422) by adding corresponding validation rule codes. After installation, the response format is as follows:
@@ -47,7 +53,7 @@ This package extends Laravel's default validation system by overwriting the defa
 To publish the configuration and language files containing the codes, use Laravel's command:
 
 ```shell
-php artisan publish --tag=validation_codes
+php artisan vendor:publish --tag=validation_codes
 ```
 
 You can then change the validation codes corresponding to the given rules in the published file, which looks like this:

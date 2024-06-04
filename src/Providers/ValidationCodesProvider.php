@@ -3,10 +3,8 @@
 namespace Kdabrow\ValidationCodes\Providers;
 
 use Illuminate\Container\Container;
-use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\ServiceProvider;
 use Kdabrow\ValidationCodes\Factory;
-use Kdabrow\ValidationCodes\Handler;
 use Kdabrow\ValidationCodes\Validator;
 
 class ValidationCodesProvider extends ServiceProvider
