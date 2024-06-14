@@ -110,8 +110,8 @@ class Validator extends \Illuminate\Validation\Validator
 
 				$this->codes->add(
 					$attribute,
-					method_exists($ruleClass, 'getCode') ? $ruleClass::getCode($attribute) : $this->fallbackTranslation(), // TODO: change E0 to translation
-				); // TODO: test
+					method_exists($ruleClass, 'getCode') ? $ruleClass::getCode($attribute) : $this->fallbackTranslation(),
+				);
 			}
 		}
 	}
@@ -122,7 +122,7 @@ class Validator extends \Illuminate\Validation\Validator
 
 		$key = $this->getKey($lowerRule);
 
-		if ($key !== ($this->getTranslation($lowerRule))) { // TODO: test
+		if ($key !== ($this->getTranslation($lowerRule))) {
 			return $this->getCustomMessageFromTranslator(
 				in_array($rule, $this->sizeRules)
 					? [$key.".{$this->getAttributeType($attribute)}", $key]
@@ -132,7 +132,7 @@ class Validator extends \Illuminate\Validation\Validator
 
 		return $this->getFromLocalArray(
 			$attribute, $lowerRule, $this->fallbackCodes
-		) ?: $this->fallbackTranslation(); // TODO: test
+		) ?: $this->fallbackTranslation();
 	}
 
 	/**

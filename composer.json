@@ -18,11 +18,10 @@
 	],
 	"require": {
 		"php": ">=8.2.0",
-		"illuminate/support": "^10.0",
-		"illuminate/validation": "^10.0"
+		"illuminate/support": "^11.0"
 	},
 	"require-dev": {
-		"orchestra/testbench": "^8.0",
+		"orchestra/testbench": "^9.0",
 		"barryvdh/laravel-ide-helper": "^3.0"
 	},
 	"autoload": {

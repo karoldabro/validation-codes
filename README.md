@@ -26,21 +26,11 @@ This package enhances Laravel's validation error responses (status 422) by addin
 
 ## Installation
 First install the package using Composer:
-```shell
-composer require kdabrow/validation-codes
-```
 
-Afterward, extend your `Exception\Handler` file with `Kdabrow\ValidationCodes\Handler`.
-```php
-<?php
-
-namespace App\Exceptions;
-
-class Handler extends \Kdabrow\ValidationCodes\Handler
-{
-
-}
-```
+| PHP  | Laravel | Package                                                  |
+|------|---------|----------------------------------------------------------|
+| ^8.2 | 11      | ```composer require "kdabrow/validation-codes: ^2.0"```  |
+| ^8.1 | 10      | ```composer require "kdabrow/validation-codes: ^1.0" ``` |
 
 ## How It Works
 
