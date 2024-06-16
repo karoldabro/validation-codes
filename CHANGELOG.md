@@ -6,6 +6,11 @@
 - Support for Laravel 11
 - Changelog
 
+## [1.1.1] - 2024-06-16
+
+### Fixes
+- Publishing assets: config and translations
+
 ## [1.1.0] - 2024-06-16
 
 ### Added
