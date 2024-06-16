@@ -23,14 +23,16 @@ This package enhances Laravel's validation error responses (status 422) by addin
   }
 }
 ```
+Error codes allow clients of your API to easily interpret returned validation errors in the way they want or need.
 
 ## Installation
-First install the package using Composer:
 
-| PHP  | Laravel | Package                                                  |
-|------|---------|----------------------------------------------------------|
-| ^8.2 | 11      | ```composer require "kdabrow/validation-codes: ^2.0"```  |
-| ^8.1 | 10      | ```composer require "kdabrow/validation-codes: ^1.0" ``` |
+First, install the package using Composer:
+
+| PHP  | Laravel | Package                                                           | Command                                                  |
+|------|---------|-------------------------------------------------------------------|----------------------------------------------------------|
+| ^8.2 | 11      | 2.0                                                               | ```composer require "kdabrow/validation-codes: ^2.0"```  |
+| ^8.1 | 10      | [1.1](https://github.com/karoldabro/validation-codes/tree/v1.1.0) | ```composer require "kdabrow/validation-codes: ^1.1" ``` |
 
 ## How It Works
 
@@ -52,7 +54,7 @@ You can then change the validation codes corresponding to the given rules in the
 <?php
 
 return [
-    'fallback_error' => 'E0', // This error code is returned while error code isn't found in this file
+    'fallback_error' => 'E0', // This error code is returned when an error code isn't found in this file
     'accepted' => 'E1',
     'accepted_if' => 'E2',
     'active_url' => 'E3',
@@ -93,7 +95,7 @@ class YourCustomValidationRule implements ValidationRule
     {
         // validation logic
     }
-    
+
     public static function getCode(): string
     {
         return 'E10000'; // The validation code to return
