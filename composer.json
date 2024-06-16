@@ -1,6 +1,6 @@
 {
 	"name": "kdabrow/validation-codes",
-	"description": "Validation codes",
+	"description": "Validation codes for API",
 	"type": "package",
 	"keywords": [
 		"php",
