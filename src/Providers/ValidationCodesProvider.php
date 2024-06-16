@@ -30,16 +30,12 @@ class ValidationCodesProvider extends ServiceProvider
 
 	public function boot()
 	{
-		$this->publishes([
-			$this->pathTo('validation_codes.php') => $this->app->configPath('validation_codes.php'),
-		], 'validation_codes.config');
-
-
 		$this->loadTranslationsFrom($this->pathTo('lang'), 'validation_codes');
 
 		$this->publishes([
+			$this->pathTo('config/validation_codes.php') => $this->app->configPath('validation_codes.php'),
 			$this->pathTo('lang') => $this->app->langPath('vendor/validation_codes'),
-		]);
+		], "validation_codes");
 	}
 
 	private function pathTo(string $directory): string
