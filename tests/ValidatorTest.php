@@ -3,10 +3,11 @@
 namespace Kdabrow\ValidationCodes\Tests;
 
 use Kdabrow\ValidationCodes\Validator;
+use PHPUnit\Framework\Attributes\Test;
 
 class ValidatorTest extends TestCase
 {
-	/** @test */
+	#[Test]
 	public function app_resolved_instance_of_the_own_validator()
 	{
 	    $this->assertInstanceOf(

@@ -9,11 +9,6 @@ use Kdabrow\ValidationCodes\Handler;
 
 class ValidationCodesTestProvider extends ServiceProvider
 {
-	public function register()
-	{
-		$this->app->singleton(ExceptionHandler::class, Handler::class);
-	}
-
 	public function boot(): void
 	{
 		$this->loadRoutesFrom(__DIR__.'/routes.php');
