@@ -1,6 +1,7 @@
 <p align="center">
 <img alt="GitHub Workflow Status (branch)" src="https://github.com/karoldabro/validation-codes/actions/workflows/laravel.yml/badge.svg">
 <img alt="Packagist Version" src="https://img.shields.io/packagist/v/kdabrow/validation-codes">
+<img alt="Packagist Downloads" src="https://img.shields.io/packagist/dm/kdabrow/validation-codes">
 <img alt="Scrutinizer code quality (GitHub/Bitbucket)" src="https://img.shields.io/scrutinizer/quality/g/karoldabro/validation-codes/master">
 </p>
 
@@ -23,7 +24,7 @@ This package enhances Laravel's validation error responses (status 422) by addin
   }
 }
 ```
-Error codes allow clients of your API to easily interpret returned validation errors in the way they want or need.
+Error codes allow clients of your API to easily interpret returned validation errors in the way they want or need. 
 
 ## Installation
 
