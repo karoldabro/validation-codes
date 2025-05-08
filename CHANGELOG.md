@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [3.0.0] - 2025-05-08
+
+### Added
+- Support for Laravel 12
+
 ## [2.0.0] - 2024-06-16
 
 ### Added
