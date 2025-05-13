@@ -15,7 +15,7 @@ class ValidationCodesProvider extends ServiceProvider
 	{
 		$this->mergeConfigFrom($this->pathTo('config' . DIRECTORY_SEPARATOR . 'validation_codes.php'), 'validation_codes');
 
-		$this->app->extend('validator', function ($translator, Container $container = null) {
+		$this->app->extend('validator', function ($translator, Container|null $container = null) {
 			$factory = new Factory($translator->getTranslator(), $container);
 
 			if (isset($this->app['db'], $this->app['validation.presence'])) {
