@@ -32,7 +32,7 @@ First, install the package using Composer:
 
 | PHP  | Laravel | Package                                                           | Command                                                  |
 |------|---------|-------------------------------------------------------------------|----------------------------------------------------------|
-| ^8.3 | 12      | 3.0                                                               | ```composer require "kdabrow/validation-codes: ^3.1"```  |
+| ^8.3 | 12      | 3.0                                                               | ```composer require "kdabrow/validation-codes: ^3.0"```  |
 | ^8.2 | 11      | 2.0                                                               | ```composer require "kdabrow/validation-codes: ^2.0"```  |
 | ^8.1 | 10      | [1.1](https://github.com/karoldabro/validation-codes/tree/v1.1.0) | ```composer require "kdabrow/validation-codes: ^1.1" ``` |
 
