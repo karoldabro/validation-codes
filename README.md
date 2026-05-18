@@ -26,6 +26,8 @@ This package enhances Laravel's validation error responses (status 422) by addin
 ```
 Error codes allow clients of your API to easily interpret returned validation errors in the way they want or need. 
 
+Sponsored by [Givore](https://givore.com) and [Mistflare](https://mistflare.studio)
+
 ## Installation
 
 First, install the package using Composer:
